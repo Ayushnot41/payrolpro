@@ -10,6 +10,8 @@ import {
   UserPlus,
   Receipt,
   Settings2,
+  AlertCircle,
+  MessageSquareWarning,
 } from "lucide-react";
 import {
   BarChart,
@@ -165,7 +167,7 @@ export default function DashboardPage() {
                     tickFormatter={(value) => `₹${(value / 100000).toFixed(1)}L`} 
                   />
                   <Tooltip 
-                    formatter={(value: number) => [formatCurrency(value), "Payroll"]} 
+                    formatter={(value: any) => [formatCurrency(Number(value) || 0), "Payroll"]} 
                     cursor={{fill: 'transparent'}}
                     contentStyle={{ borderRadius: '8px', border: '1px solid #e2e8f0', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
                   />
@@ -274,6 +276,48 @@ export default function DashboardPage() {
                 })}
               </TableBody>
             </Table>
+          </CardContent>
+        </Card>
+
+        {/* Complaints Section */}
+        <Card className="col-span-5 shadow-sm border-slate-200 overflow-hidden">
+          <CardHeader className="flex flex-row items-center justify-between bg-red-50/30 border-b pb-4">
+            <div className="flex items-center gap-2">
+              <MessageSquareWarning className="h-5 w-5 text-red-600" />
+              <CardTitle className="text-lg">Employee Grievance & Complaints</CardTitle>
+            </div>
+            <Badge variant="outline" className="bg-red-50 text-red-700 border-red-200">
+              {data.complaintStats.reduce((acc: number, c: any) => acc + c.count, 0)} Total Active
+            </Badge>
+          </CardHeader>
+          <CardContent className="p-0">
+             <Table>
+               <TableHeader>
+                 <TableRow className="bg-transparent hover:bg-transparent">
+                   <TableHead className="font-semibold text-slate-600 px-6 py-4 uppercase text-xs tracking-wider">Subject Category</TableHead>
+                   <TableHead className="font-semibold text-slate-600 px-6 py-4 uppercase text-xs tracking-wider">Cases</TableHead>
+                   <TableHead className="font-semibold text-slate-600 px-6 py-4 uppercase text-xs tracking-wider text-right">Status</TableHead>
+                 </TableRow>
+               </TableHeader>
+               <TableBody>
+                 {data.complaintStats.map((complaint: any, idx: number) => (
+                   <TableRow key={idx} className="hover:bg-slate-50 transition-colors">
+                     <TableCell className="px-6 py-4">
+                        <div className="flex flex-col">
+                           <span className="font-bold text-slate-900">{complaint.category}</span>
+                           <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Priority: {complaint.count > 3 ? "High" : "Normal"}</span>
+                        </div>
+                     </TableCell>
+                     <TableCell className="px-6 py-4 tabular-data font-semibold">{complaint.count}</TableCell>
+                     <TableCell className="px-6 py-4 text-right">
+                        <Badge variant="outline" className={complaint.status === 'Pending' ? "bg-amber-50 text-amber-700 border-amber-200" : "bg-emerald-50 text-emerald-700 border-emerald-200"}>
+                          {complaint.status}
+                        </Badge>
+                     </TableCell>
+                   </TableRow>
+                 ))}
+               </TableBody>
+             </Table>
           </CardContent>
         </Card>
 

@@ -22,6 +22,12 @@ export async function getDashboardData() {
     value: count,
   }));
 
+  const complaintStats = [
+    { category: "Payroll", count: 4, status: "Pending" },
+    { category: "Tax", count: 2, status: "Active" },
+    { category: "HR Policy", count: 1, status: "Resolved" },
+  ];
+
   return {
     kpis: {
       totalEmployees: employees.length,
@@ -29,6 +35,7 @@ export async function getDashboardData() {
       pendingApprovals: runs.filter(r => r.status === "PROCESSING").length,
       complianceStatus: "Active & Compliant",
     },
+    complaintStats,
     monthlyTrend: monthlyTrend.length ? monthlyTrend : [
       { name: 'Oct', total: 4200000 },
       { name: 'Nov', total: 4350000 },
