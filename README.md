@@ -11,26 +11,54 @@
 
 ## 📊 System Overview
 
-### **How it Works (The Flow)**
+### **Architecture & Execution Blueprint**
 
 ```mermaid
 graph TD
-    A[Admin: Ayush Sarkar] --> B{Data Input}
-    B -->|Workforce| C[Employee Ledger]
-    B -->|Attendance| D[Attendance Matrix]
-    B -->|Taxes| E[Statutory Config]
+    %% Node Definitions
+    Admin(["👤 Admin: Ayush Sarkar"])
+    Input{"📥 Data Input"}
+    Ledger[("📋 Employee Ledger")]
+    Matrix[("⏰ Attendance Matrix")]
+    Config[("⚙️ Statutory Config")]
+    Engine{{"🚀 Salary Computation Engine"}}
+    Run{"💳 Payroll Run"}
+    Finalize{{"✅ Finalize & Disburse"}}
+    PDF[/📄 Salary slips PDF/]
+    Insights[/📈 Insights & Analytics/]
+    Excel[/📊 Export Excel/CSV/]
+
+    %% Connections
+    Admin --> Input
+    Input -.-> Ledger
+    Input -.-> Matrix
+    Input -.-> Config
     
-    C & D & E --> F[Salary Computation Engine]
+    Ledger & Matrix & Config ==> Engine
     
-    F --> G[Payroll Run]
-    G -->|Verify| H[Finalize & Disburse]
+    Engine --> Run
+    Run -->|Verification| Finalize
     
-    H --> I[Salary slips PDF]
-    H --> J[Insights & Analytics]
-    H --> K[Export Excel/CSV]
+    Finalize --> PDF
+    Finalize --> Insights
+    Finalize --> Excel
+
+    %% Styling (Professional & Unique)
+    style Admin fill:#1e293b,stroke:#0f172a,stroke-width:2px,color:#fff
+    style Input fill:#3b82f6,stroke:#1d4ed8,stroke-width:2px,color:#fff
+    style Ledger fill:#f8fafc,stroke:#3b82f6,stroke-dasharray: 5 5
+    style Matrix fill:#f8fafc,stroke:#3b82f6,stroke-dasharray: 5 5
+    style Config fill:#f8fafc,stroke:#3b82f6,stroke-dasharray: 5 5
+    style Engine fill:#8b5cf6,stroke:#6d28d9,stroke-width:3px,color:#fff
+    style Run fill:#f59e0b,stroke:#b45309,color:#fff
+    style Finalize fill:#10b981,stroke:#047857,stroke-width:2px,color:#fff
+    style PDF fill:#fff,stroke:#ef4444
+    style Insights fill:#fff,stroke:#6366f1
+    style Excel fill:#fff,stroke:#10b981
 ```
 
-### **Core Features**
+### **Core Platform Capabilities**
+
 
 | Feature | Description |
 | :--- | :--- |

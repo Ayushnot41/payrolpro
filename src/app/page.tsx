@@ -12,6 +12,7 @@ import {
   Settings2,
   AlertCircle,
   MessageSquareWarning,
+  ArrowRight,
 } from "lucide-react";
 import {
   BarChart,
@@ -48,6 +49,7 @@ export default function DashboardPage() {
     monthlyTrend: any[];
     departmentBreakdown: any[];
     recentRuns: any[];
+    complaintStats: any[];
   } | null>(null);
 
   useEffect(() => {
@@ -114,7 +116,9 @@ export default function DashboardPage() {
           <CardContent>
             <div className="text-3xl font-bold text-slate-900 tabular-data">{data.kpis.pendingApprovals}</div>
             <p className="text-xs text-slate-500 mt-1">
-              <a href="#" className="text-primary hover:underline font-medium">View all</a>
+              <a href="/reports" className="text-primary hover:underline font-bold flex items-center gap-1 group">
+                Review Statements <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+              </a>
             </p>
           </CardContent>
         </Card>
